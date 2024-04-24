@@ -28,8 +28,8 @@ logging.basicConfig(handlers=[RotatingFileHandler('qr_generation.log', maxBytes=
                     level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-def generate_qr_code(product, weight, mrp, packing_date):
-    details = f"Product: {product}\nWeight: {weight}\nMRP: Rs.{mrp}\nPacking Date: {packing_date}"
+def generate_qr_code(product, weight, mrp, packing_date, url):
+    details = f"Product: {product}\nWeight: {weight}\nMRP: Rs.{mrp}\nPacking Date: {packing_date}\nURL: {url}"
 
     logging.info('Starting QR code generation process.')
     logging.debug(f'QR code details: {details}')
@@ -50,22 +50,22 @@ def generate_qr_code(product, weight, mrp, packing_date):
         logging.debug('QR code fitting is done.')
 
         # convert into image
-        img = qr.make_image(fill_color="green", back_color="white")
-        img.save("myqr.png")
+        img = qr.make_image(fill_color="red", back_color="white")
+        img.save("new_qr.png")
         logging.info('QR code image saved successfully.')
         print("QR code details:\n", details) 
     except Exception as e:
         logging.error(f'Error during QR code generation: {e}')
         logging.error(traceback.format_exc()) 
+
 if __name__ == "__main__":
     product = "Toor Dal"
     weight = "1 kg"
     mrp = 100
     packing_date = "15-01-2024"
-    generate_qr_code(product, weight, mrp, packing_date)
+    url = "https://google.com/toor_dal"
+    generate_qr_code(product, weight, mrp, packing_date, url)
 
 ```
 
-
-## *Author Name*
-[Vikrant](https://github.com/vikrant-v28)
+##output
